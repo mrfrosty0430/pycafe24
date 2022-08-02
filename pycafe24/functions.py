@@ -216,7 +216,7 @@ class Cafe24Client(object):
 	
 	def list_customer_orders(self, member_id, start_date, end_date):
 		payload={}
-		url=f"https://mrfrosty0430.cafe24api.com/api/v2/admin/orders?start_date={start_date}&end_date={end_date}&fields={member_id}&limit=1000"
+		url=f"https://mrfrosty0430.cafe24api.com/api/v2/admin/orders?start_date={start_date}&end_date={end_date}&fields=order_id,{member_id}&limit=1000"
 		response = self._get(url, payload=payload)
 		
 		res = response.json()
