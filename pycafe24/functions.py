@@ -212,6 +212,16 @@ class Cafe24Client(object):
 		url = "https://{0}.cafe24api.com/api/v2/admin/customers/{1}/coupons".format(self.credentials_manager.mall_id,member_id)
 		response = self._get(url,payload=payload)
 		return response
+	
+	def list_customer_orders(self, member_id, start_date, end_date):
+		"""
+		starte_date and end_date should be in a form of yyyy-mm-dd
+		"""
+		
+		payload = {}
+		url = f"https://{self.credentials_manager.mall_id}.cafe24api.com/api/v2/admin/orders?start_date={start_date}&end_date={end_date}&fields=order_id&limit=1000"
+		response = self._get(url,payload=payload)
+		return response
 
 	def count_customer_coupon(self,member_id):
 		payload = {}
