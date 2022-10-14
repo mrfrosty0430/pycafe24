@@ -56,7 +56,10 @@ class Cafe24Credentials(object):
 		if self.access_token == None:
 			return False
 		else:
+			print("KST")
+			KST = datetime.timezone(datetime.timedelta(hours=9))
 			access_token_expiration_timestamp = datetime.datetime.strptime(self.access_token_expiration,"%Y-%m-%dT%H:%M:%S.%f")
+			# current_timestamp = datetime.datetime.now(KST)
 			current_timestamp = datetime.datetime.now()
 			# print(datetime.datetime.now())
 
@@ -69,6 +72,8 @@ class Cafe24Credentials(object):
 		if self.refresh_token == None:
 			return False
 		else:
+			print("KST")
+			KST = datetime.timezone(datetime.timedelta(hours=9))
 			refresh_token_expiration_timestamp = datetime.datetime.strptime(self.refresh_token_expiration,"%Y-%m-%dT%H:%M:%S.%f")
 			current_timestamp = datetime.datetime.now()
 

@@ -13,8 +13,7 @@ class Cafe24Client(object):
 		headers = {
 					'Authorization': "Bearer {0}".format(self.credentials_manager.access_token),
 					'Content-Type': "application/json",
-					'X-Cafe24-Api-Version': "2022-06-01",
-					'X-Api-Call-Limit': "1/40"
+					'X-Cafe24-Api-Version': "2022-06-01"
 					}
 		response = requests.request("PUT",url,data=payload,headers=headers)
 		return response
@@ -26,8 +25,7 @@ class Cafe24Client(object):
 		headers = {
 					'Authorization': "Bearer {0}".format(self.credentials_manager.access_token),
 					'Content-Type': "application/json",
-					'X-Cafe24-Api-Version': "2022-06-01",
-					'X-Api-Call-Limit': "1/40"
+					'X-Cafe24-Api-Version': "2022-06-01"
 					}
 		response = requests.request("POST",url,data=payload,headers=headers)
 		return response
@@ -38,10 +36,12 @@ class Cafe24Client(object):
 		headers = {
 					'Authorization': "Bearer {0}".format(self.credentials_manager.access_token),
 					'Content-Type': "application/json",
-					'X-Cafe24-Api-Version': "2022-06-01",
-					'X-Api-Call-Limit': "1/40"
+					'X-Cafe24-Api-Version': "2022-06-01"
 					}
-		response = requests.request("GET",url,data=payload,headers=headers)
+		# print(payload)
+		# response = requests.get(url,params=payload,headers=headers)
+		response = requests.request("GET",url,params=payload,headers=headers)
+		print(response.headers)
 
 
 		return response
@@ -61,6 +61,116 @@ class Cafe24Client(object):
 
 
 
+	def get_customer_groups(self,**rest):
+		payload = {}
+		for (key,value) in rest.items():
+			payload[key] = value
+
+		url = "https://{0}.cafe24api.com/api/v2/admin/customergroups".format(self.credentials_manager.mall_id)
+		response = self._get(url,payload=payload)
+		return response
+
+
+	def get_customer_privacy(self,**rest):
+		payload = {}
+		for (key,value) in rest.items():
+			payload[key] = value
+
+		url = "https://{0}.cafe24api.com/api/v2/admin/customersprivacy".format(self.credentials_manager.mall_id)
+		response = self._get(url,payload=payload)
+		return response
+
+	def count_customer_information(self,**rest):
+		payload = {}
+		for (key,value) in rest.items():
+			payload[key] = value
+		url = "https://{0}.cafe24api.com/api/v2/admin/customersprivacy/count".format(self.credentials_manager.mall_id)
+		response = self._get(url,payload = payload)
+		return response
+
+
+	def list_customer_information(self,**rest):
+		payload = {}
+		for (key,value) in rest.items():
+			payload[key] = value
+		url = "https://{0}.cafe24api.com/api/v2/admin/customersprivacy".format(self.credentials_manager.mall_id)
+		response = self._get(url,payload = payload)
+		return response
+
+	def get_dashboard(self,**rest):
+		payload = {}
+		for (key,value) in rest.items():
+			payload[key] = value
+
+		url = "https://{0}.cafe24api.com/api/v2/admin/dashboard".format(self.credentials_manager.mall_id)
+		response = self._get(url,payload=payload)
+		return response
+
+
+	def list_activitylogs(self,**rest):
+		payload = {}
+		for (key,value) in rest.items():
+			payload[key] = value
+
+		url = "https://{0}.cafe24api.com/api/v2/admin/activitylogs".format(self.credentials_manager.mall_id)
+		response = self._get(url,payload=payload)
+		return response
+
+
+	def list_customers(self,**rest):
+		payload = {}
+		for (key,value) in rest.items():
+			payload[key] = value
+
+		url = "https://{0}.cafe24api.com/api/v2/admin/customers".format(self.credentials_manager.mall_id)
+		response = self._get(url,payload=payload)
+		return response
+
+
+
+	def list_orders(self, **rest):
+		payload = {}
+		for (key,value) in rest.items():
+			payload[key] = value
+
+		url = "https://{0}.cafe24api.com/api/v2/admin/orders".format(self.credentials_manager.mall_id)
+		response = self._get(url,payload=payload)
+		return response
+
+	def retrieve_order(self,order_id,**rest):
+		payload = {}
+		for (key,value) in rest.items():
+			payload[key] = value
+
+		url = "https://{0}.cafe24api.com/api/v2/admin/orders/{1}".format(self.credentials_manager.mall_id,order_id)
+		response = self._get(url,payload=payload)
+		return response
+
+	def create_order(self,**rest):
+		request = {}
+		payload = {}
+		url = "https://{0}.cafe24api.com/api/v2/admin/orders".format(self.credentials_manager.mall_id)
+		payload["request"] = request
+		response = self._post(url,payload=json.dumps(payload))
+		return response
+
+	def list_products(self,**rest):
+		payload = {}
+		for (key,value) in rest.items():
+			payload[key] = value
+		url = "https://{0}.cafe24api.com/api/v2/admin/products".format(self.credentials_manager.mall_id)
+		response = self._get(url,payload=payload)
+		return response
+
+	def retrieve_product(self, product_no, **rest):
+		payload = {}
+		for (key,value) in rest.items():
+			payload[key] = value
+		url = "https://{0}.cafe24api.com/api/v2/admin/products/{1}".format(self.credentials_manager.mall_id, product_no)
+		print(url)
+		response = self._get(url,payload=payload)
+		return response
+
 	def num_coupon(self):
 		payload = {}
 		url = "https://{0}.cafe24api.com/api/v2/admin/coupons/count".format(self.credentials_manager.mall_id)
@@ -68,8 +178,10 @@ class Cafe24Client(object):
 		return response
 
 
-	def list_coupon(self):
+	def list_coupon(self, **rest):
 		payload = {}
+		for (key,value) in rest.items():
+			payload[key] = value
 		url = "https://{0}.cafe24api.com/api/v2/admin/coupons".format(self.credentials_manager.mall_id)
 		response = self._get(url,payload=payload)
 		return response
@@ -207,8 +319,10 @@ class Cafe24Client(object):
 		return response
 
 
-	def list_customer_coupon(self,member_id):
+	def list_customer_coupon(self,member_id,**rest):
 		payload = {}
+		for (key,value) in rest.items():
+			payload[key] = value
 		url = "https://{0}.cafe24api.com/api/v2/admin/customers/{1}/coupons".format(self.credentials_manager.mall_id,member_id)
 		response = self._get(url,payload=payload)
 		return response
@@ -225,9 +339,33 @@ class Cafe24Client(object):
 		response = self._delete(url,payload=payload)
 		return response
 
-	def retrieve_points(self,member_id,email,order_id,group_no,start_date,end_date,case,points_category,offset,limit):
 
-		pass
+	def list_customer_memos(self,member_id,**rest):
+		payload = {}
+		for (key,value) in rest.items():
+			payload[key] = value
+		url = "https://{0}.cafe24api.com/api/v2/admin/customers/{1}/memos".format(self.credentials_manager.mall_id,member_id)
+		response = self._get(url,payload=payload)
+		return response
+
+
+
+	def retrieve_points(self,**rest):
+		payload = {}
+		for (key,value) in rest.items():
+			payload[key] = value
+		url = "https://{0}.cafe24api.com/api/v2/admin/points".format(self.credentials_manager.mall_id)
+		response = self._get(url,payload=payload)
+		return response
+
+	def retrieve_points_report(self,**rest):
+		payload = {}
+		for (key,value) in rest.items():
+			payload[key] = value
+
+		url = "https://{0}.cafe24api.com/api/v2/admin/points/report".format(self.credentials_manager.mall_id)
+		response = self._get(url,payload=payload)
+		return response
 
 	def modify_points(self,member_id, amount, type, **rest):
 		payload = {}
