@@ -17,7 +17,7 @@ class Cafe24Client(object):
 					}
 		response = requests.request("PUT",url,data=payload,headers=headers)
 		return response
-
+	
 
 	def _post(self,url,payload):
 		if not self.credentials_manager.has_valid_access_token():
@@ -159,6 +159,14 @@ class Cafe24Client(object):
 		for (key,value) in rest.items():
 			payload[key] = value
 		url = "https://{0}.cafe24api.com/api/v2/admin/products".format(self.credentials_manager.mall_id)
+		response = self._get(url,payload=payload)
+		return response
+	
+	def num_products(self, **rest):
+		payload = {}
+		for (key,value) in rest.items():
+			payload[key] = value
+		url = "https://{0}.cafe24api.com/api/v2/admin/products/count".format(self.credentials_manager.mall_id)
 		response = self._get(url,payload=payload)
 		return response
 
