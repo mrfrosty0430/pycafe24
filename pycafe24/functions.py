@@ -145,6 +145,15 @@ class Cafe24Client(object):
 		url = "https://{0}.cafe24api.com/api/v2/admin/orders/{1}".format(self.credentials_manager.mall_id,order_id)
 		response = self._get(url,payload=payload)
 		return response
+	
+	def list_order_items(self,order_id,**rest):
+		payload = {}
+		for (key,value) in rest.items():
+			payload[key] = value
+
+		url = "https://{0}.cafe24api.com/api/v2/admin/orders/{1}/items".format(self.credentials_manager.mall_id,order_id)
+		response = self._get(url,payload=payload)
+		return response
 
 	def create_order(self,**rest):
 		request = {}
