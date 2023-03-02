@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
    name='pycafe24',
-   version='1.15',
+   version='1.21',
    description='A Cafe24 API library',
    author='Sung Jun Hong',
    author_email='sjtheorange@gmail.com',

@@ -3,6 +3,5 @@ dist/*
 pycafe24/cache/*
 pycafe24.egg-info/*
 test.py
-test0.py
-test1.py
-test2.py
+test[0-9].py
+
