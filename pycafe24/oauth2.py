@@ -4,6 +4,7 @@ import base64
 import datetime
 
 from pycafe24.cache import Cache
+from pycafe24.exceptions import Cafe24Exception
 
 
 class Cafe24AuthBase(object):
@@ -108,6 +109,13 @@ class Cafe24Credentials(object):
         json_out = response.json()
         print("jsonout is ", json_out)
         self.access_token = json_out["access_token"]
+        if "error" in json_out:
+            raise Cafe24Exception(
+                response.status_code,
+                response.status_code,
+                json_out["error"],
+                reason=json_out["error_description"]
+            )
         self.access_token_expiration = json_out["expires_at"]
         self.refresh_token = json_out["refresh_token"]
         self.refresh_token_expiration = json_out["refresh_token_expires_at"]

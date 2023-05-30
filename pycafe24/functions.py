@@ -145,6 +145,16 @@ class Cafe24Client(object):
         response = self._get(url, payload=payload)
         return response
 
+    def count_orders(self, **rest):
+        payload = {}
+        for (key, value) in rest.items():
+            payload[key] = value
+
+        url = "https://{0}.cafe24api.com/api/v2/admin/orders/count".format(
+            self.credentials_manager.mall_id)
+        response = self._get(url, payload=payload)
+        return response
+
     def retrieve_order(self, order_id, **rest):
         payload = {}
         for (key, value) in rest.items():
@@ -169,6 +179,15 @@ class Cafe24Client(object):
         for (key, value) in rest.items():
             payload[key] = value
         url = "https://{0}.cafe24api.com/api/v2/admin/products".format(
+            self.credentials_manager.mall_id)
+        response = self._get(url, payload=payload)
+        return response
+
+    def count_products(self, **rest):
+        payload = {}
+        for (key, value) in rest.items():
+            payload[key] = value
+        url = "https://{0}.cafe24api.com/api/v2/admin/products/count".format(
             self.credentials_manager.mall_id)
         response = self._get(url, payload=payload)
         return response
@@ -451,6 +470,22 @@ class Cafe24Client(object):
         for (key, value) in rest.items():
             payload[key] = value
         url = f'https://{self.credentials_manager.mall_id}.cafe24api.com/api/v2/admin/boards/{board_no}/articles'
+        response = self._get(url, payload=payload)
+        return response
+
+    def create_board_post(self, board_no, **rest):
+        payload = {}
+        for (key, value) in rest.items():
+            payload[key] = value
+        url = f'https://{self.credentials_manager.mall_id}.cafe24api.com/api/v2/admin/boards/{board_no}/articles'
+        response = self._post(url, payload=payload)
+        return response
+
+    def list_themes(self, **rest):
+        payload = {}
+        for (key, value) in rest.items():
+            payload[key] = value
+        url = f'https://{self.credentials_manager.mall_id}.cafe24api.com/api/v2/admin/themes'
         response = self._get(url, payload=payload)
         return response
 
